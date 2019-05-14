@@ -87,9 +87,11 @@ function! UpdateTags()
 	let resp = system(cmd)
 endfunction
 
+command! MakeTags !ctags -R .
+
 autocmd BufWritePost *.cpp,*.h,*.c call UpdateTags()
 
-autocmd BufWritePre *.cpp,*.h,*.c :%s/\s\+$//e
+autocmd BufWritePre *.cpp,*.h,*.c,*.py :%s/\s\+$//e
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
