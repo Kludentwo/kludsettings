@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+Plug 'keith/swift.vim'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'jceb/vim-orgmode', { 'branch': 'v0.6.0' }
 Plug 'mfukar/robotframework-vim'
