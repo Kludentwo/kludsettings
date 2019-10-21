@@ -101,4 +101,7 @@ eval "$(direnv hook zsh)"
 # unset bell
 unsetopt BEEP
 
+unsetopt autopushd
+unsetopt pushdignoredups
+
 NNTPSERVER='nntp.lore.kernel.org' && export NNTPSERVER
