@@ -6,6 +6,7 @@ Plug 'mfukar/robotframework-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chrisbra/vim-kconfig'
 Plug 'dart-lang/dart-vim-plugin'
+Plug 'thinca/vim-localrc'
 call plug#end()
 
 set nocp
@@ -63,6 +64,8 @@ set si
 set nowrap
 
 set laststatus=2
+
+set exrc
 
 set number
 "highlight LineNr term=bold cterm=NONE ctermfg=blue ctermbg=NONE gui=NONE guifg=blue guibg=NONE
