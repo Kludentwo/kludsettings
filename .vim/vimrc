@@ -7,71 +7,110 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'chrisbra/vim-kconfig'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'thinca/vim-localrc'
+Plug 'vimwiki/vimwiki'
+Plug 'mattn/calendar-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mileszs/ack.vim'
 call plug#end()
 
-set nocp
-set history=700
-set so=7
+" System {{{
+set nocp			" set nocompatible
+set nobackup			" no vim backup
+set nowb			" no write buffer backup
+set noswapfile			" no swap file
 
+" file explorer
+let g:netrw_liststyle=3		" Choose between thin, long, wide and tree. 3 = wide.
+let g:netrw_banner=0		" remove the banner
+
+let maplocalleader = "½"
+let mapleader = ","
+" }}}
+
+" Colours {{{
+let g:solarized_termcolors=256
+syntax enable			" enable syntax processing
+set background=light
+colorscheme solarized
+" }}}
+
+" Spaces and tabs {{{
+set shiftwidth=8
+set softtabstop=8		" number of visual spaces in tab while editing
+set tabstop=8			" number of visual spaces per TAB
+set noexpandtab			" tabs are not spaces
+" }}}
+
+" UI Config {{{
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
 
-set ruler
-set cmdheight=2
-
-set hid
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
-
-set lazyredraw
-
-set magic
-
-set showmatch
-set mat=2
-
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-
-let g:solarized_termcolors=256
-syntax enable
-set background=light
-colorscheme solarized
-
-set encoding=utf8
-set ffs=unix,dos,mac
-
-set nobackup
-set nowb
-set noswapfile
-
-set noexpandtab
-
-set shiftwidth=8
-set softtabstop=8
-set tabstop=8
-
-set ai
-set si
-set nowrap
-
-set laststatus=2
-
-set exrc
-
-set number
-"highlight LineNr term=bold cterm=NONE ctermfg=blue ctermbg=NONE gui=NONE guifg=blue guibg=NONE
+set number			" show line numbers
+set cursorline			" highlight the line the cursor is currently in
+set history=700			" vim history
+set so=7			" scroll off, see 7 lines above and below the cursor
+set ruler			" Show where the cursor is in the document corner
+set cmdheight=2			" Give more space for displaying messages.
+set hid				" Hidden: allows hiding buffers even though they contain modifications
+set noerrorbells		" turn off error bells
+set novisualbell		" turn off visual bell as well
+set t_vb=			" No beep or flash is wanted in visualbell
+set tm=500			" timeoutlen default=1000. time in ms that is waited for  a key sequence
+set backspace=eol,start,indent	" allow backspacing autoindent, line breaks and start
+set whichwrap+=<,>,h,l		" which commands will wrap the cursor around the line borders
+set wildmenu			" visual autocomplete for command menu
+set lazyredraw			" redraw only when we need to
+set showmatch			" highlight matching
+set laststatus=2		" make vim show a status line even when only one window is shown
+set ai				" Auto indent
+set si				" smart indent
+set encoding=utf8		" character encoding
+set ffs=unix,dos,mac		" EOL formats to be  tried when editing a new buffer
+set nowrap			" lines longer than editor do not wrap
 
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+" }}}
 
+" Searching {{{
+set ignorecase
+set smartcase
+set hlsearch			" highlight matches
+set incsearch			" search as characters are entered
+set mat=2			" Tenths of a second to show the matching paren
+set magic			" Changes the special characters that can be used in search patterns
+
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR> 
+" }}}
+
+" Folding {{{
+set foldenable			" enable folding
+set foldlevelstart=10		" open most folds by default
+set foldnestmax=10		" 10 nested fold max
+" space opens/closes folds
+nnoremap <space> za	
+set foldmethod=indent		" fold based on indent level
+" }}}
+
+" Ag {{{
+let g:ackprg = 'ag --vimgrep --smart-case'
+nnoremap <leader>a :Ack
+" }}}
+
+" CtrlP options {{{
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+" }}}
+
+" Project options {{{
+set exrc
+set secure
+" }}}
+
+" C Functions {{{
 function! DelTagOfFile(file)
 	let fullpath = a:file
 	let cwd = getcwd()
@@ -91,15 +130,20 @@ function! UpdateTags()
 	let resp = system(cmd)
 endfunction
 
-command! MakeTags !ctags -R .
-
 autocmd BufWritePost *.cpp,*.h,*.c call UpdateTags()
+" }}}
 
+" Commands {{{
+command! MakeTags !ctags -R .
+" }}}
+
+" filetype specific stuff {{{
+" Remove trailing whitespace
 autocmd BufWritePre *.cpp,*.h,*.c,*.py :%s/\s\+$//e
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-let g:netrw_liststyle=3
+autocmd FileType vim setlocal foldmethod=marker foldlevel=0
+" }}}
 
-let maplocalleader = "½"
 
