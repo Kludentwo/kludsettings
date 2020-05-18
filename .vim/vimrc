@@ -1,16 +1,15 @@
 call plug#begin('~/.vim/plugged')
 Plug 'keith/swift.vim'
 Plug 'vim-scripts/DoxygenToolkit.vim'
-Plug 'jceb/vim-orgmode', { 'branch': 'v0.6.0' }
 Plug 'mfukar/robotframework-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chrisbra/vim-kconfig'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'thinca/vim-localrc'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/calendar-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
+Plug 'craigemery/vim-autotag'
 call plug#end()
 
 " System {{{
@@ -130,7 +129,7 @@ function! UpdateTags()
 	let resp = system(cmd)
 endfunction
 
-autocmd BufWritePost *.cpp,*.h,*.c call UpdateTags()
+"autocmd BufWritePost *.cpp,*.h,*.c call UpdateTags()
 " }}}
 
 " Commands {{{
@@ -145,5 +144,3 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 autocmd FileType vim setlocal foldmethod=marker foldlevel=0
 " }}}
-
-
