@@ -10,6 +10,8 @@ Plug 'mattn/calendar-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'craigemery/vim-autotag'
+Plug 'tpope/vim-fugitive'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 " System {{{
@@ -21,6 +23,7 @@ set noswapfile			" no swap file
 " file explorer
 let g:netrw_liststyle=3		" Choose between thin, long, wide and tree. 3 = wide.
 let g:netrw_banner=0		" remove the banner
+let g:netrw_fastbrowse=0
 
 let maplocalleader = "½"
 let mapleader = ","
@@ -69,6 +72,9 @@ set ffs=unix,dos,mac		" EOL formats to be  tried when editing a new buffer
 set nowrap			" lines longer than editor do not wrap
 
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+"set statusline=0
+"set showtabline
+"set tabline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 " }}}
 
 " Searching {{{
@@ -95,6 +101,10 @@ set foldmethod=indent		" fold based on indent level
 " Ag {{{
 let g:ackprg = 'ag --vimgrep --smart-case'
 nnoremap <leader>a :Ack
+" }}}
+
+" editorconfig options {{{
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " }}}
 
 " CtrlP options {{{
@@ -133,7 +143,7 @@ endfunction
 " }}}
 
 " Commands {{{
-command! MakeTags !ctags -R .
+command! MakeTags !ctags -R --exclude=@.ctagsignore .
 " }}}
 
 " filetype specific stuff {{{

@@ -98,6 +98,9 @@ source $ZSH/oh-my-zsh.sh
 # direnv hook
 eval "$(direnv hook zsh)"
 
+# color hook
+eval `dircolors ~/.colors/dircolors-solarized/dircolors.ansi-light`
+
 # unset bell
 unsetopt BEEP
 

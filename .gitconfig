@@ -1,9 +1,15 @@
 [user]
-	email = nigd@prevas.dk
+	email = nicolai.glud@prevas.dk
 	name = Nicolai Glud
 [core]
 	editor = vim
 [alias]
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	tree = log --graph --all --date=relative --format=format:'%C(yellow)%h%C(reset) %C(green)(%ar)%C(reset)%C(auto)%d%C(reset) %C(white)%s%C(reset) %C(cyan)- %an%C(reset)'
+	ltree = log --graph --date=relative --format=format:'%C(yellow)%h%C(reset) %C(green)(%ar)%C(reset)%C(auto)%d%C(reset) %C(white)%s%C(reset) %C(cyan)- %an%C(reset)'
 [push]
 	default = simple
+[color]
+	ui = auto
+[commit]
+	gpgsign = true
